@@ -2,17 +2,8 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var fs = require('fs');
-
-var knex = require('knex')({
-	client: 'pg',
-	connection: process.env.DATABASE_URL
-});
-
-// Set up globals for each request
-app.use(function(req, res, next) {
-	req.db = knex;
-	next();
-});
+var mongoose = require('mongoose');
+mongoose.connect(process.env.DATABASE_URL);
 
 // pre-empt requests for admin static files
 app.use(function(req, res, next) {

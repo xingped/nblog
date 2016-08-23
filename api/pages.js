@@ -7,6 +7,8 @@ router.get('/:id', function(req, res) {
 
 router.put('/', function(req, res) {
 	// store a new page
+	req.db.raw("\
+		INSERT INTO pages(");
 });
 
 router.post('/:id', function(req, res) {
