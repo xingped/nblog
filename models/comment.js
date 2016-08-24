@@ -1,11 +1,27 @@
 var mongoose = require('mongoose');
 
 var commentSchema = mongoose.Schema({
-	body: String,
-	author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-	createDate: Date,
-	editDate: Date,
-	comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }]
+	body: {
+		type: String,
+		required: true
+	},
+	author: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User',
+		required: true
+	},
+	createDate: {
+		type: Date,
+		required: true,
+		default: Date.now
+	},
+	editDate: {
+		type: Date
+	},
+	comments: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Comment'
+	}]
 });
 
 commentSchema.pre('find', function(next) {

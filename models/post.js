@@ -18,6 +18,7 @@ var postSchema = new mongoose.Schema({
 	createDate: {
 		type: Date,
 		default: Date.now
+		required: true
 	},
 	editDate: {
 		type: Date,
