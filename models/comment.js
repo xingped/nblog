@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var immutablePlugin = require('mongoose-immutable');
 
 var commentSchema = mongoose.Schema({
 	body: {
@@ -8,12 +9,14 @@ var commentSchema = mongoose.Schema({
 	author: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User',
-		required: true
+		required: true,
+		immutable: true
 	},
 	createDate: {
 		type: Date,
 		required: true,
-		default: Date.now
+		default: Date.now,
+		immutable: true
 	},
 	editDate: {
 		type: Date
@@ -23,6 +26,8 @@ var commentSchema = mongoose.Schema({
 		ref: 'Comment'
 	}]
 });
+
+commentSchema.plugin(immutablePlugin);
 
 commentSchema.pre('find', function(next) {
 	this.populate('comments');

@@ -1,13 +1,15 @@
 var mongoose = require('mongoose');
+var immutablePlugin = require('mongoose-immutable');
 
 var userSchema = mongoose.Schema({
 	username: {
 		type: String,
-		required: true
+		immutable: true
 	},
 	password: {
-		type: String,
-		required: true
+		type: String
+		min: 64,
+		max: 64
 	},
 	email: {
 		type: String,
@@ -15,8 +17,11 @@ var userSchema = mongoose.Schema({
 	},
 	joinDate: {
 		type: Date,
-		default: Date.now
+		default: Date.now,
+		immutable: true
 	}
 });
+
+userSchema.plugin(immutablePlugin);
 
 module.exports = mongoose.model('User', userSchema);

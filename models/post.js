@@ -33,11 +33,16 @@ var postSchema = new mongoose.Schema({
 	comments: [{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Comment'
+	}],
+	tags: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Tag'
 	}]
 });
 
 postSchema.pre('findOne', function(next) {
 	this.populate('comments');
+	this.populate('tags');
 	next();
 });
 
